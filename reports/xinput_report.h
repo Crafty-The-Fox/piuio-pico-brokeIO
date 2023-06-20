@@ -63,10 +63,11 @@ static XInputReport xinputReport = {
 
 uint16_t xinput_get_report(XInputReport** report, struct inputArray* input) {
 	xinputReport.buttons1 = 0
-		| (!input->p1_cn  ? XBOX_MASK_UP    : 0)
-		| (!input->p1_dr  ? XBOX_MASK_DOWN  : 0)
-		| (!input->p1_dl  ? XBOX_MASK_LEFT  : 0)
-		| (!input->p1_ur  ? XBOX_MASK_RIGHT : 0)
+		| (!input->p1_cn  ? XBOX_MASK_RB    : 0) //center pannel for piu exceeded
+		| (!input->p1_dr  ? XBOX_MASK_B  : 0)
+		| (!input->p1_dl  ? XBOX_MASK_A  : 0)
+		| (!input->p1_ur  ? XBOX_MASK_Y : 0)
+		| (!input->p1_ul  ? XBOX_MASK_X : 0)
 		| (!input->test    ? XBOX_MASK_START : 0)
 		| (!input->service ? XBOX_MASK_BACK  : 0)
 //		| (pressedL3()    ? XBOX_MASK_LS    : 0)
@@ -74,13 +75,13 @@ uint16_t xinput_get_report(XInputReport** report, struct inputArray* input) {
 	;
 
 	xinputReport.buttons2 = 0
-		| (!input->p1_ul ? XBOX_MASK_LB   : 0)
-		| (!input->p2_ur ? XBOX_MASK_RB   : 0)
+
 		| (!input->clear ? XBOX_MASK_HOME : 0)
-		| (!input->p2_dl ? XBOX_MASK_A    : 0)
-		| (!input->p2_dr ? XBOX_MASK_B    : 0)
-		| (!input->p2_ul ? XBOX_MASK_X    : 0)
-		| (!input->p2_cn ? XBOX_MASK_Y    : 0)
+		| (!input->p2_cn  ? XBOX_MASK_RB    : 0) //center pannel for piu exceeded
+		| (!input->p2_dr  ? XBOX_MASK_B  : 0) //dr piu eceeded
+		| (!input->p2_dl  ? XBOX_MASK_A  : 0) //dl piu eceeded
+		| (!input->p2_ur  ? XBOX_MASK_Y : 0) //ur piu eceeded
+		| (!input->p2_ul  ? XBOX_MASK_X : 0) //ul piu eceeded
 	;
 
 	//xinputReport.lx = static_cast<int16_t>(state.lx) + INT16_MIN;
