@@ -58,6 +58,8 @@ void lights_send(uint32_t* buf) {
 
     // tell latch to update values with what we just sent
     gpio_put(LATCH_RCLK_PIN, 1);
+
+    busy_wait_us(10);
 }
 
 void lights_enable() {
